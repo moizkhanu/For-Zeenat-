@@ -1,8 +1,11 @@
-
+src="1e7812a0-43c1-42e3-a658-0ccba9733ac3.jpg"
+src="IMG_3697.jpg"
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>For Zeenat ❤️</title>
 
 <style>
 body{
@@ -17,29 +20,55 @@ body{
   color:white;
 }
 
+/* floating hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:18px;
+  animation:float 6s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes float{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-110vh);opacity:0}
+}
+
 .card{
-  width:340px;
+  width:350px;
   background:rgba(255,255,255,0.12);
-  backdrop-filter:blur(16px);
-  padding:28px;
+  backdrop-filter:blur(18px);
+  padding:30px;
   border-radius:24px;
   text-align:center;
   position:relative;
+  box-shadow:0 25px 50px rgba(0,0,0,.25);
 }
 
 .photos{
   display:flex;
   justify-content:center;
-  gap:14px;
-  margin-bottom:15px;
+  gap:15px;
+  margin-bottom:18px;
 }
 
 .photos img{
-  width:90px;
-  height:90px;
+  width:95px;
+  height:95px;
   border-radius:50%;
   object-fit:cover;
   border:3px solid white;
+}
+
+h1{
+  font-size:22px;
+  margin:10px 0;
+  letter-spacing:1px;
+}
+
+p{
+  font-size:14px;
+  opacity:.9;
 }
 
 button{
@@ -49,6 +78,7 @@ button{
   font-size:15px;
   cursor:pointer;
   margin:12px;
+  transition:.2s;
 }
 
 #yes{
@@ -63,13 +93,22 @@ button{
   position:absolute;
 }
 
+/* success screen */
 .success{
   display:none;
+  text-align:center;
 }
 
 .success img{
-  width:230px;
+  width:240px;
   border-radius:20px;
+  margin-bottom:15px;
+  animation:pop .4s ease;
+}
+
+@keyframes pop{
+  from{transform:scale(.7);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
 </style>
 </head>
@@ -79,36 +118,66 @@ button{
 <div class="card" id="game">
 
   <div class="photos">
+    <!-- YOUR REAL IMAGES FROM GITHUB -->
     <img src="IMG_3697.jpg">
     <img src="1e7812a0-43c1-42e3-a658-0ccba9733ac3.jpg">
   </div>
 
-  <h2>Hey Zeenat 🤍</h2>
-  <p>Try pressing "No" if you can 😌</p>
+  <h1>BE MY VALENTINE? ❤️</h1>
 
-  <button id="yes">Yes ❤️</button>
-  <button id="no">No</button>
+  <p>
+    Long distance sucks…<br>
+    but loving you is the easiest thing ever.
+  </p>
+
+  <p style="font-size:13px;opacity:.7;">(try pressing NO… if you can 😏)</p>
+
+  <button id="yes">YES 💖</button>
+  <button id="no">NO</button>
 
 </div>
+
 
 <div class="success" id="success">
+
   <img src="IMG_3697.jpg">
-  <h2>You chose me 🤍</h2>
-  <p>Best decision ever.</p>
+
+  <h2>She said YES 🤍</h2>
+
+  <p>
+    Best decision of your life.<br>
+    Now you’re stuck with me forever 😌
+  </p>
+
 </div>
 
+
 <script>
+// floating hearts animation
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart";
+  h.style.left=Math.random()*100+"vw";
+  h.innerText="💗";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),6000);
+},350);
+
+
+// NO button runs away from cursor
 const noBtn=document.getElementById("no");
 
-function move(){
-  const x=Math.random()*240-120;
-  const y=Math.random()*240-120;
+function moveButton(e){
+  const x=Math.random()*260-130;
+  const y=Math.random()*260-130;
   noBtn.style.transform=`translate(${x}px,${y}px)`;
 }
 
-noBtn.onmouseover=move;
-noBtn.ontouchstart=move;
+noBtn.onmouseover=moveButton;
+noBtn.ontouchstart=moveButton;
 
+
+// YES click → reveal screen
 document.getElementById("yes").onclick=()=>{
   document.getElementById("game").style.display="none";
   document.getElementById("success").style.display="block";
@@ -117,3 +186,4 @@ document.getElementById("yes").onclick=()=>{
 
 </body>
 </html>
+
